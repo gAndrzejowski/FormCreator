@@ -1,0 +1,19 @@
+{
+  "name": "formcreator",
+  "version": "1.0.0",
+  "description": "Form Creator",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "start:dev": "webpack --mode development",
+    "start:watch": "webpack --mode development --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
