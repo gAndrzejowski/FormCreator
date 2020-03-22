@@ -8,8 +8,8 @@
     "start:dev": "webpack --mode development",
     "start:watch": "webpack --mode development --watch"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Grzegorz Andrzejowski",
+  "license": "MIT",
   "devDependencies": {
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
