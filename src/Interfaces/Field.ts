@@ -1,9 +1,10 @@
 import Component from './Component';
+import FieldLabel from '../Components/FieldLabel';
 import FieldType from '../Enums/FieldType';
 
 interface Field extends Component {
     name: string,
-    label: string, //TODO: convert to FieldLabel class once it exists
+    label: FieldLabel,
     type: FieldType,
     value: any
 }
