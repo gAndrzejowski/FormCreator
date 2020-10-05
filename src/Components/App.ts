@@ -6,15 +6,15 @@ const App = (): Component => ({
     render(parent: HTMLElement): void {
 
         const fields = new Map([
-            ['normalInput', { type: FieldType.Text, }],
-            ['text area', { type: FieldType.Textarea, }],
-            ['date', { type: FieldType.Date, }],
-            ['email', { type: FieldType.Email, }],
-            ['selection', { type: FieldType.Select, options: new Map([
-                ['1', 'one'],
-                ['2', 'two']
-                ]) }],
-            ['checkbox input', { type: FieldType.Checkbox, }],
+            ['imie', { type: FieldType.Text, labelText: 'Twoje imię' }],
+            ['nazwisko', { type: FieldType.Textarea, labelText: 'Twoje nazwisko' }],
+            ['email', { type: FieldType.Email, labelText: 'Email' }],
+            ['kierstud', { type: FieldType.Select, labelText: 'Kierunek studiów', options: new Map([
+                ['ie', 'Informatyka i Ekonometria'],
+                ['za', 'Zarządzanie']
+            ]) }],
+            ['elearning', {type: FieldType.Checkbox, labelText: 'Czy preferujesz elearning?'}],
+            ['uwagi', {type: FieldType.Textarea, labelText: 'Uwagi'}]
         ]);
 
         const form = new Form(fields);
@@ -22,6 +22,7 @@ const App = (): Component => ({
         form.render(parent);
 
         const getAll = document.createElement('button');
+        getAll.innerHTML = 'pobierz';
         getAll.addEventListener('click', () => document.write(JSON.stringify(
             form.getValue()
         )));

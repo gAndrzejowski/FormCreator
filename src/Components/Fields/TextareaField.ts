@@ -22,6 +22,7 @@ class TextareaField implements Field {
     };
 
     render(parent: HTMLElement) {
+        this.label.render(parent);
         parent.appendChild(this.DOM);
     }
 }
