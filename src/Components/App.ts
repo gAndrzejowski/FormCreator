@@ -1,21 +1,31 @@
 import Component from "../Interfaces/Component";
-import FieldLabel  from './FieldLabel';
-import Select from './Fields/Select';
+import Form from './Form';
+import FieldType from '../Enums/FieldType';
 
 const App = (): Component => ({
     render(parent: HTMLElement): void {
-        parent.innerHTML = "Hello from App.ts";
-        parent.innerHTML += "<hr /> Here are some labels:";
-        const labels = document.createElement('div');
-        const selection = new Select('selection', 'test', new Map(
-            [
-                ['1', 'test1'],
-                ['2', 'test2'],
-            ]
-        ))
 
-        selection.render(labels);
-        parent.appendChild(labels);
+        const fields = new Map([
+            ['normalInput', { type: FieldType.Text, }],
+            ['text area', { type: FieldType.Textarea, }],
+            ['date', { type: FieldType.Date, }],
+            ['email', { type: FieldType.Email, }],
+            ['selection', { type: FieldType.Select, options: new Map([
+                ['1', 'one'],
+                ['2', 'two']
+                ]) }],
+            ['checkbox input', { type: FieldType.Checkbox, }],
+        ]);
+
+        const form = new Form(fields);
+
+        form.render(parent);
+
+        const getAll = document.createElement('button');
+        getAll.addEventListener('click', () => document.write(JSON.stringify(
+            form.getValue()
+        )));
+        document.body.appendChild(getAll);
     }
 });
 

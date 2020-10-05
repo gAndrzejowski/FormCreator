@@ -1,23 +1,29 @@
 import Field from '../../Interfaces/Field';
 import FieldTypes from '../../Enums/FieldType';
 import FieldLabel from '../FieldLabel';
+import FieldSpec from '../../Interfaces/FieldSpec';
 
 class InputField implements Field {
 
     name: string;
-    value: string;
+    get value(): string {
+        return this.DOM.value;
+    };
     label: FieldLabel;
     type: FieldTypes;
     protected DOM: HTMLInputElement;
 
-    constructor(name: string, labelText: string, defaultValue: string = '') {
-        this.name = name || `InputField=${Date.now()}`;
+    constructor({
+        name,
+        labelText,
+        defaultValue = ''
+    }: FieldSpec) {
+        this.name = name || `InputField_${Date.now()}`;
         this.label = new FieldLabel(labelText || this.name);
-        this.value = defaultValue;
         this.type = FieldTypes.Text
         this.DOM = document.createElement('input');
         this.DOM.type = 'text';
-        this.DOM.value = defaultValue;
+        this.DOM.value = defaultValue || '';
     };
 
     render(parent: HTMLElement) {
