@@ -1,0 +1,1 @@
+export const navigateHome = (): void => {window.location.href = '/';};
