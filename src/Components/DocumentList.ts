@@ -35,10 +35,13 @@ class DocumentList implements Component {
             empty.appendChild(emptyCell);
             this.DOM.appendChild(empty);
         }
+        
         else for (let documentId of this.documents) {
             const row = document.createElement('tr');
             const timeCell = document.createElement('td');
-            const creationTime = new Date(documentId.split('=')[1]);
+            const creationTime = new Date(Number(documentId.split('=')[1]));
+            console.log(creationTime, documentId, documentId.split('=')[1]);
+
             timeCell.innerHTML = `Formularz utworzony <time datetime=${creationTime.toISOString()}>
             ${creationTime.getDate()}.${creationTime.getMonth()+1}.${creationTime.getFullYear()}\n
             ${creationTime.getHours()}:${creationTime.getMinutes()}:${creationTime.getSeconds()}</time>`;
@@ -55,3 +58,5 @@ class DocumentList implements Component {
     }
 
 }
+
+export default DocumentList;

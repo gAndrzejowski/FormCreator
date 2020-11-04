@@ -20,10 +20,10 @@ class LocStorage implements DataStorage {
     }
 
     saveDocument(formData: {[index: string]: any}): string {
-        const docID = `document=${Date.now()}`;
+        const docID = `document=${Date.now().toString()}`
         this.setStorage({
             ...this.storage,
-            docID: formData
+            [ docID ]: formData
         });
         return docID;
     }
