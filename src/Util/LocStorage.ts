@@ -28,6 +28,12 @@ class LocStorage implements DataStorage {
         return docID;
     }
 
+    removeDocument(id: string): void {
+        const store = this.storage;
+        delete store[ id ];
+        this.setStorage(store);
+    }
+
     loadDocument(docID: string): Object {
         return this.storage[docID] || {};
     }

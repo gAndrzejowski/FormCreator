@@ -12,6 +12,19 @@ class DocumentList implements Component {
 
     constructor() {
         this.DOM = document.createElement('table');
+    }
+
+    getDocumentsList(): void {
+        this.documents = this.StorageUtils.getDocuments();
+    }
+
+    removeDocumentById(id: string): void {
+        this.StorageUtils.removeDocument(id);
+        this.getDocumentsList();
+        this.renderCells();
+    }
+
+    private renderCells(): void {
         this.DOM.innerHTML = `
         <caption> Zapisane dokumenty </caption>
         <thead>
@@ -19,14 +32,6 @@ class DocumentList implements Component {
             <th> Akcja </th>
         <thead>
         `;
-    }
-
-    getDocumentsList(): void {
-        this.documents = this.StorageUtils.getDocuments();
-    }
-
-    render(parent: HTMLElement): void {
-        this.getDocumentsList();
         if (!this.documents.length) {
             const empty = document.createElement('tr');
             const emptyCell = document.createElement('td');
@@ -45,15 +50,24 @@ class DocumentList implements Component {
             timeCell.innerHTML = `Formularz utworzony <time datetime=${creationTime.toISOString()}>
             ${creationTime.getDate()}.${creationTime.getMonth()+1}.${creationTime.getFullYear()}\n
             ${creationTime.getHours()}:${creationTime.getMinutes()}:${creationTime.getSeconds()}</time>`;
-            const openCell = document.createElement('td');
+            const actionCell = document.createElement('td');
             const formLink = document.createElement('a');
             formLink.setAttribute('href', `index.html?${documentId}`);
             formLink.innerText = 'Otwórz';
-            openCell.appendChild(formLink);
+            actionCell.appendChild(formLink);
+            const deleteForm = document.createElement('button');
+            deleteForm.innerHTML = 'Usuń';
+            deleteForm.addEventListener('click', () => {this.removeDocumentById(documentId)});
+            actionCell.appendChild(deleteForm);
             row.appendChild(timeCell);
-            row.appendChild(formLink);
+            row.appendChild(actionCell);
             this.DOM.appendChild(row);
         }
+    }
+
+    render(parent: HTMLElement): void {
+        this.getDocumentsList();
+        this.renderCells();
         parent.appendChild(this.DOM);
     }
 
